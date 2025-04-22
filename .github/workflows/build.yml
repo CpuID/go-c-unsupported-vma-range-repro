@@ -52,5 +52,3 @@ jobs:
           push: false
           provenance: false
           platforms: linux/${{ matrix.build-arch }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
