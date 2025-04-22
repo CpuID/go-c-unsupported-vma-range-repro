@@ -2,11 +2,13 @@
 
 # Summary
 
-Reproduction of bug found when building https://github.com/majst01/fluent-bit-go-redis-output (in Docker), specifically for `arm64` cross-compiling using an `amd64` Github Actions runner.
+Reproduction of bug found when building https://github.com/ZigZagT/fluent-bit-go-redis-output (in Docker), specifically for `arm64` cross-compiling using an `amd64` Github Actions runner.
 
 This will be used to provide evidence to upstream projects when filing bug report/s.
 
 # The Original Error
+
+**NOTE: I build the fork from `ZigZagT` as it has some desired fixes in it, but `go.mod` still defines the project as from `majst01`**
 
 ```
  > [linux/arm64 builder 5/5] RUN make:
