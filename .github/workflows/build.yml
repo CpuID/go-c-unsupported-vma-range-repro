@@ -17,7 +17,7 @@ jobs:
         build-arch: [amd64, arm64]
         # Inside and outside of Docker
         # Introduce Docker later if needed for repro
-        docker: [true, false]
+        docker: ['true', 'false']
     runs-on: ${{ matrix.runner-arch }}
     steps:
       - name: Clone the fluent-bit-go-redis-output repository
