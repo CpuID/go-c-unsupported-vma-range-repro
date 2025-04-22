@@ -10,20 +10,30 @@ jobs:
       fail-fast: false
       matrix:
         # One Go version to start, may test others later to track down the bug
-        go-version: [1.24.1]
+        go-version:
+          - 1.24.1
         # amd64 + arm64 (Linux only)
-        runner-arch: [ubuntu-24.04, ubuntu-24.04-arm]
+        runner-arch:
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
         # arm64 + amd64 (Linux only)
-        build-arch: [amd64, arm64]
+        build-arch:
+          - amd64
+          - arm64
         # Inside and outside of Docker
-        # Introduce Docker later if needed for repro
-        docker: ['docker', 'no_docker']
+        docker:
+          - docker
+          - no_docker
+        # The original and the fork
+        source-repo-and-ref:
+          - majst01/fluent-bit-go-redis-output@556919d57c274432e54dcaac5a8c308127fde3b4
+          - ZigZagT/fluent-bit-go-redis-output@cd1cd84e11091c76b55a89765ce6dacc35af4f84
     runs-on: ${{ matrix.runner-arch }}
     steps:
       - name: Clone the fluent-bit-go-redis-output repository
         uses: actions/checkout@v4
         with:
-          repository: ZigZagT/fluent-bit-go-redis-output
+          repository: ${{ format('{0}', matrix.source-repo-and-ref.split('@')[0], matrix.source-repo-and-ref.split('@')[1]) }}
           ref: cd1cd84e11091c76b55a89765ce6dacc35af4f84
 
       - name: Set up Go
