@@ -35,7 +35,8 @@ jobs:
       - name: install aarch64-linux-gnu-gcc and set CC (for outside Docker only)
         if: matrix.docker == 'no_docker'
         run: |
-          apt install -y gcc-aarch64-linux-gnu
+          sudo apt update
+          sudo apt install -y gcc-aarch64-linux-gnu
           echo "CC=aarch64-linux-gnu-gcc" >> $GITHUB_ENV
 
       - name: Build ${{ matrix.build-arch }} binary on ${{ matrix.runner-arch }} Runner (outside Docker)
