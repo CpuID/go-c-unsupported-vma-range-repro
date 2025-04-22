@@ -19,7 +19,7 @@ jobs:
     runs-on: ${{ matrix.runner-arch }}
     steps:
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go-version }}
 
