@@ -70,7 +70,8 @@ jobs:
 
       - name: Build ${{ matrix.build-arch }} binary on ${{ matrix.runner-arch }} Runner (in Docker)
         if: matrix.docker == 'docker'
-        timeout-minutes: 3
+        # Average is about 45~sec, 2mins is too long...
+        timeout-minutes: 2
         uses: docker/build-push-action@v6
         with:
           context: .
