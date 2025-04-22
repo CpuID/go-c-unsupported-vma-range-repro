@@ -31,5 +31,8 @@ jobs:
 
       - name: Build ${{ matrix.build-arch }} binary on ${{ matrix.runner-arch }}
       # Runner (Docker: ${{ matrix.docker }})
-        run: |
-          GOOS=linux GOARCH=${{ matrix.build-arch }} make
+        run: make
+        env:
+          GOOS: linux
+          GOARCH: ${{ matrix.build-arch }}
+          CGO_ENABLED: 1
