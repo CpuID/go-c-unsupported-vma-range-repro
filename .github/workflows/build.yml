@@ -55,6 +55,7 @@ jobs:
 
       - name: Build ${{ matrix.build-arch }} binary on ${{ matrix.runner-arch }} Runner (in Docker)
         if: matrix.docker == 'docker'
+        timeout-minutes: 3
         uses: docker/build-push-action@v6
         with:
           context: .
