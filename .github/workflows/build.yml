@@ -25,16 +25,20 @@ jobs:
           - docker
           - no_docker
         # The original and the fork
-        source-repo-and-ref:
-          - majst01/fluent-bit-go-redis-output@556919d57c274432e54dcaac5a8c308127fde3b4
-          - ZigZagT/fluent-bit-go-redis-output@cd1cd84e11091c76b55a89765ce6dacc35af4f84
+        source:
+          - gh_user: majst01
+            env:
+              REPO_REF: 556919d57c274432e54dcaac5a8c308127fde3b4
+          - gh_user: ZigZagT
+            env:
+              REPO_REF: cd1cd84e11091c76b55a89765ce6dacc35af4f84
     runs-on: ${{ matrix.runner-arch }}
     steps:
       - name: Clone the fluent-bit-go-redis-output repository
         uses: actions/checkout@v4
         with:
-          repository: ${{ format('{0}', matrix.source-repo-and-ref.split('@')[0], matrix.source-repo-and-ref.split('@')[1]) }}
-          ref: cd1cd84e11091c76b55a89765ce6dacc35af4f84
+          repository: ${{ matrix.source.gh_user }}/fluent-bit-go-redis-output
+          ref: ${{ matrix.source.env.REPO_REF }}
 
       - name: Set up Go
         if: matrix.docker == 'no_docker'
@@ -72,9 +76,9 @@ jobs:
           file: Dockerfile
           build-args: |
             GO_VERSION=${{ matrix.go-version }}
-            REPO_GH_USER=ZigZagT
+            REPO_GH_USER=${{ matrix.source.gh_user }}
             REPO_NAME=fluent-bit-go-redis-output
-            REPO_REF=cd1cd84e11091c76b55a89765ce6dacc35af4f84
+            REPO_REF=${{ matrix.source.env.REPO_REF }}
           push: false
           provenance: false
           platforms: linux/${{ matrix.build-arch }}
