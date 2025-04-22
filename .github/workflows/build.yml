@@ -17,7 +17,7 @@ jobs:
         build-arch: [amd64, arm64]
         # Inside and outside of Docker
         # Introduce Docker later if needed for repro
-        docker: ['true', 'false']
+        docker: ['docker', 'no_docker']
     runs-on: ${{ matrix.runner-arch }}
     steps:
       - name: Clone the fluent-bit-go-redis-output repository
@@ -32,7 +32,7 @@ jobs:
           go-version: ${{ matrix.go-version }}
 
       - name: Build ${{ matrix.build-arch }} binary on ${{ matrix.runner-arch }} Runner (outside Docker)
-        if: matrix.docker == 'false'
+        if: matrix.docker == 'no_docker'
         run: make
         env:
           GOOS: linux
@@ -40,11 +40,11 @@ jobs:
           CGO_ENABLED: 1
 
       - name: Set up Docker Buildx
-        if: matrix.docker == 'true'
+        if: matrix.docker == 'docker'
         uses: docker/setup-buildx-action@v3
 
       - name: Build ${{ matrix.build-arch }} binary on ${{ matrix.runner-arch }} Runner (in Docker)
-        if: matrix.docker == 'true'
+        if: matrix.docker == 'docker'
         uses: docker/build-push-action@v6
         with:
           context: .
