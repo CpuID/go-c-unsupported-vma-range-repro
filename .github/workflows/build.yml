@@ -6,6 +6,8 @@ on:
 jobs:
   build:
     strategy:
+      # Run all jobs to a conclusion to see the outcomes
+      fail-fast: false
       matrix:
         # One Go version to start, may test others later to track down the bug
         go-version: [1.24.1]
