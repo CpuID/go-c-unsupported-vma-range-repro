@@ -27,6 +27,7 @@ jobs:
           ref: cd1cd84e11091c76b55a89765ce6dacc35af4f84
 
       - name: Set up Go
+        if: matrix.docker == 'no_docker'
         uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go-version }}
