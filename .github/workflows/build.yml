@@ -49,6 +49,11 @@ jobs:
         with:
           context: .
           file: Dockerfile
+          build-args: |
+            GO_VERSION=${{ matrix.go-version }}
+            REPO_GH_USER=ZigZagT
+            REPO_NAME=fluent-bit-go-redis-output
+            REPO_REF=cd1cd84e11091c76b55a89765ce6dacc35af4f84
           push: false
           provenance: false
           platforms: linux/${{ matrix.build-arch }}
