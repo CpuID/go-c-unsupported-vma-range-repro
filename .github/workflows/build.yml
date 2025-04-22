@@ -33,7 +33,9 @@ jobs:
 
       - name: Build ${{ matrix.build-arch }} binary on ${{ matrix.runner-arch }} Runner (outside Docker)
         if: matrix.docker == 'no_docker'
-        run: make
+        run: |
+          make
+          file out_redis.so
         env:
           GOOS: linux
           GOARCH: ${{ matrix.build-arch }}

@@ -15,3 +15,5 @@ RUN git clone https://github.com/${REPO_GH_USER}/${REPO_NAME} /go/src/github.com
 WORKDIR /go/src/github.com/${REPO_GH_USER}/${REPO_NAME}/
 
 RUN make
+
+RUN file out_redis.so
