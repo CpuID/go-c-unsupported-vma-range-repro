@@ -20,16 +20,16 @@ jobs:
         docker: [true, false]
     runs-on: ${{ matrix.runner-arch }}
     steps:
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: ${{ matrix.go-version }}
-
       - name: Clone the fluent-bit-go-redis-output repository
         uses: actions/checkout@v4
         with:
           repository: ZigZagT/fluent-bit-go-redis-output
           ref: cd1cd84e11091c76b55a89765ce6dacc35af4f84
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
 
       - name: Build ${{ matrix.build-arch }} binary on ${{ matrix.runner-arch }} Runner (outside Docker)
         if: matrix.docker == 'false'
